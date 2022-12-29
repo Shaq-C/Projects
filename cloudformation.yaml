@@ -13,7 +13,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: 173.29.246.111/32
+          CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
           Value: Default SG
@@ -29,14 +29,22 @@ Resources:
       KeyName: KeyPair
       ImageId: ami-0a606d8395a538502
       Tags:
-        - Key: Name
-          Value: Project1
+        - Key: Web Server
+          Value: StackName
       UserData: 
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            sudo su
-            yum update -y
-            yum install -y httpd
+            sudo yum update -y
+            sudo yum install -y httpd
+            sudo systemctl enable httpd
+            sudo systemctl start httpd
             cd /var/www/html
-            wget 
+            sudo wget https://raw.githubusercontent.com/Shaq-C/Projects/main/Project-101-kittens-carousel-static-website-ec2/static-web/index.html
+            sudo wget https://raw.githubusercontent.com/Shaq-C/Projects/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
+            sudo wget https://raw.githubusercontent.com/Shaq-C/Projects/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
+            sudo wget https://raw.githubusercontent.com/Shaq-C/Projects/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
+            sudo wget https://raw.githubusercontent.com/Shaq-C/Projects/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat3.jpg
+
+
+            
